@@ -17,10 +17,10 @@ public class Loan : BaseAuditableEntity
     public decimal MonthlyIncome { get; set; }
 
     public ICollection<PaymentSchedule> PaymentSchedules { get; set; } = new List<PaymentSchedule>();
-    public ICollection<Trasaction> Transactions { get; set; } = new List<Trasaction>();
+    public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
 
-    public Loan(string userId, decimal amount, int term, decimal interestRate, LoanType loanType, decimal monthlyIncome, decimal monthlyPayment)
+    public Loan(string userId, decimal amount, int term, decimal interestRate, LoanType loanType, decimal monthlyIncome)
     {
         if (string.IsNullOrWhiteSpace(userId))
             throw new ArgumentException("El id del usuario es requerido.", nameof(userId));
@@ -34,9 +34,6 @@ public class Loan : BaseAuditableEntity
         if (monthlyIncome <= 0)
             throw new ArgumentOutOfRangeException(nameof(monthlyIncome), "El ingreso mensual debe ser mayor que cero.");
 
-        if (monthlyPayment <= 0)
-            throw new ArgumentOutOfRangeException(nameof(monthlyPayment), "El pago mensual debe ser mayor que cero.");
-
         if (!Enum.IsDefined(typeof(LoanType), loanType))
             throw new ArgumentException("Tipo de préstamo no válido.", nameof(loanType));
 
@@ -46,7 +43,7 @@ public class Loan : BaseAuditableEntity
         InterestRate = interestRate;
         LoanType = loanType;
         MonthlyIncome = monthlyIncome;
-        MonthlyPayment = monthlyPayment;
+        MonthlyPayment = CalculateMonthlyPayment(loanType, amount, interestRate, term);
     }
 
     public void ValidateRules(int activeLoansCount, decimal totalExistingMonthlyPayments)
@@ -64,6 +61,12 @@ public class Loan : BaseAuditableEntity
     public void ApplyAutoScoring(int activeLoansCount)
     {
         Status = (Amount < 10000m && activeLoansCount < 2) ? LoanStatus.Approved : LoanStatus.Pending;
+    }
+
+    private static decimal CalculateMonthlyPayment(LoanType loanType, decimal amount, decimal interestRate, int term)
+    {
+        var strategy = LoanStrategyFactory.GetStrategy(loanType);
+        return strategy.CalculateMonthlyPayment(amount, interestRate, term);
     }
 
     public void GenerateSchedule(DateTime startDate)

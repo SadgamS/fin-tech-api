@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="DTOs/" />
+    <Folder Include="DTOs/Loan/" />
+    <Folder Include="DTOs/Transaction/" />
     <Folder Include="Interfaces/" />
+    <Folder Include="Services/" />
   </ItemGroup>
 
   <PropertyGroup>

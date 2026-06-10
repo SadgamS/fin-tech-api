@@ -3,7 +3,7 @@ using FinTech.Domain.Enums;
 
 namespace FinTech.Domain.Entities;
 
-public class Trasaction : BaseAuditableEntity
+public class Transaction : BaseAuditableEntity
 {
     public string IdempotencyKey { get; set; } = string.Empty;
     public TransactionType Type { get; set; }

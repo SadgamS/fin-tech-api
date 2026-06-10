@@ -1,4 +1,4 @@
-using System.Transactions;
+using FinTech.Domain.Entities;
 using FinTech.Domain.Enums;
 
 namespace FinTech.Domain.Interfaces;
