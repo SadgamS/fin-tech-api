@@ -7,7 +7,18 @@
 
   <ItemGroup>
     <Folder Include="Data/" />
+    <Folder Include="Data/Configurations/" />
+    <Folder Include="Data/Seeds/" />
     <Folder Include="Repositories/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
   </ItemGroup>
 
   <PropertyGroup>

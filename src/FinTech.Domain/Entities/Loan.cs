@@ -19,6 +19,9 @@ public class Loan : BaseAuditableEntity
     public ICollection<PaymentSchedule> PaymentSchedules { get; set; } = new List<PaymentSchedule>();
     public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
+    public Loan()
+    {
+    }
 
     public Loan(string userId, decimal amount, int term, decimal interestRate, LoanType loanType, decimal monthlyIncome)
     {
