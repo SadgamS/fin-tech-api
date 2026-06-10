@@ -69,18 +69,18 @@ public class Loan : BaseAuditableEntity
     private static decimal CalculateMonthlyPayment(LoanType loanType, decimal amount, decimal interestRate, int term)
     {
         var strategy = LoanStrategyFactory.GetStrategy(loanType);
-        return strategy.CalculateMonthlyPayment(amount, interestRate, term);
+        return strategy.CalculateMonthlyPayment(amount, CalculateMonthlyRate(interestRate), term);
     }
 
     public void GenerateSchedule(DateTime startDate)
     {
         var strategy = LoanStrategyFactory.GetStrategy(LoanType);
-        PaymentSchedules = strategy.GenerateSchedule(Id, Amount, CalculateMonthlyRate(), Term, startDate);
+        PaymentSchedules = strategy.GenerateSchedule(Id, Amount, CalculateMonthlyRate(InterestRate), Term, startDate);
     }
 
-    private decimal CalculateMonthlyRate()
+    private static decimal CalculateMonthlyRate(decimal interestRate)
     {
-        return (decimal)(Math.Pow((double)(1 + InterestRate), 1.0 / 12) - 1);
+        return (decimal)(Math.Pow((double)(1 + interestRate), 1.0 / 12) - 1);
     }
 
 }
