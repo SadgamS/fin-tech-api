@@ -13,8 +13,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        var connectionString = GetConnectionString(configuration);
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(connectionString));
@@ -23,6 +22,18 @@ public static class DependencyInjection
         services.AddScoped<ITransactionRepository, TransactionRepository>();
 
         return services;
+    }
+
+    private static string GetConnectionString(IConfiguration configuration)
+    {
+        // Railway provee DATABASE_URL como variable de entorno
+        var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+        // if (!string.IsNullOrEmpty(databaseUrl))
+        //     return ConvertDatabaseUrlToConnectionString(databaseUrl);
+
+        return configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     }
 
 }

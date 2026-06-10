@@ -5,7 +5,7 @@ namespace FinTech.Application.Interfaces;
 
 public interface ITransactionService
 {
-    Task<TransactionResponse> CreateAsync(CreateTransactionRequest request);
+    Task<(TransactionResponse transaction, bool isNew)> CreateAsync(CreateTransactionRequest request);
     Task<IEnumerable<TransactionResponse>> GetAllAsync(
         TransactionType? type = null,
         TransactionStatus? status = null);

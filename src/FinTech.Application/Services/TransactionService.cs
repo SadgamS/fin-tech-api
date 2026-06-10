@@ -15,12 +15,12 @@ public class TransactionService : ITransactionService
         _transactionRepo = transactionRepo;
     }
 
-    public async Task<TransactionResponse> CreateAsync(CreateTransactionRequest request)
+    public async Task<(TransactionResponse transaction, bool isNew)> CreateAsync(CreateTransactionRequest request)
     {
         // Idempotencia: si ya existe con esta key, retornar la original
         var existing = await _transactionRepo.GetByIdempotencyKeyAsync(request.IdempotencyKey);
         if (existing != null)
-            return MapTransaction(existing);
+            return (MapTransaction(existing), false);
 
         if (!Enum.TryParse<TransactionType>(request.Type, true, out var type))
             throw new ArgumentException("Tipo de transacción inválido");
@@ -36,7 +36,7 @@ public class TransactionService : ITransactionService
         };
 
         await _transactionRepo.CreateAsync(transaction);
-        return MapTransaction(transaction);
+        return (MapTransaction(transaction), true);
     }
 
     public async Task<IEnumerable<TransactionResponse>> GetAllAsync(
