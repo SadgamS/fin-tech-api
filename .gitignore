@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# appsettings files
+appsettings.*.json
+
 # User-specific files
 *.rsuser
 *.suo
@@ -480,3 +483,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+src/FinTech.API/appsettings.Development.json
