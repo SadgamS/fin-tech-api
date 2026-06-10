@@ -4,5 +4,6 @@
     <Project Path="src/FinTech.Application/FinTech.Application.csproj" />
     <Project Path="src/FinTech.Domain/FinTech.Domain.csproj" />
     <Project Path="src/FinTech.Infrastructure/FinTech.Infrastructure.csproj" />
+    <Project Path="src/FinTech.Tests/FinTech.Tests.csproj" />
   </Folder>
 </Solution>
