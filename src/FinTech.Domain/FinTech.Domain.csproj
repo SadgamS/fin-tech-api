@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Common/" />
+    <Folder Include="Constants/" />
     <Folder Include="Entities/" />
     <Folder Include="Interfaces/" />
+    <Folder Include="Strategies/" />
   </ItemGroup>
 
 </Project>
