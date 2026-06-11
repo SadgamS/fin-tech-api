@@ -38,13 +38,13 @@
 4. Aplica las migraciones para crear la base de datos:
 
    ```bash
-   dotnet ef database update --project src/FinTech.Infrastructure --startup-project src/FinTech.Api
+   dotnet ef database update --project src/FinTech.Infrastructure --startup-project src/FinTech.API
    ```
 
 5. Ejecuta la API:
 
    ```bash
-   dotnet run --project src/FinTech.Api
+   dotnet run --project src/FinTech.API
    ```
 
 6. Accede a Swagger para probar los endpoints:
@@ -64,5 +64,6 @@ dotnet test --project src/FinTech.Tests
 
 La API está desplegada en Railway y se puede acceder a través de la siguiente URL:
 
-```https://fin-tech-api-production.up.railway.app/swagger/index.html
+```
+https://fin-tech-api-production.up.railway.app/swagger/index.html
 ```
