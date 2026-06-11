@@ -2,10 +2,10 @@
 
 Esta diseñado siguiendo la arquitectura limpia (Clean Architecture) para mantener una separación clara entre las diferentes capas de la aplicación. Las capas principales son:
 
-- **Domain**: Contiene las entidades, interfaces y lógica de negocio. Es independiente de cualquier framework o tecnología.
+- **Domain**: Contiene las entidades, interfaces y reglas de negocio. Es independiente de cualquier framework o tecnología.
 - **Application**: Contiene los casos de uso y la lógica de aplicación. Depende de la capa Domain pero no de la capa Infrastructure.
 - **Infrastructure**: Contiene la implementación de acceso a datos utilizando Entity Framework Core. Depende de la capa Domain.
-- **API**: Contiene el proyecto de la API RESTful. Depende de la capa Domain y de la capa Infrastructure para manejar las solicitudes HTTP y la lógica de negocio.
+- **API**: Contiene el proyecto de la API RESTful. Depende de la capa Application y de la capa Infrastructure para manejar las solicitudes HTTP y la lógica de negocio.
 
 ## Estructura de carpetas
 
