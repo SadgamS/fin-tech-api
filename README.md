@@ -57,7 +57,7 @@
 Para ejecutar los tests unitarios, utiliza el siguiente comando:
 
 ```bash
-dotnet test --project src/FinTech.Tests
+dotnet test
 ```
 
 ## Deploy url
